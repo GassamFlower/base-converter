@@ -1,0 +1,28 @@
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+out/
+
+# 环境变量（真实凭证绝不进 git）
+.env
+.env.local
+.env.*.local
+
+# 日志
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Git 内部 / 分析工具
+*.db
+*.sqlite
