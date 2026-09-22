@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binary to Decimal &amp; Hex Converter - Free Base Converter</title>
+<meta name="description" content="Free binary to decimal, decimal to binary, and hex converter. Convert between binary (base-2), decimal (base-10), hex (base-16) instantly with big-number support. No signup, works in your browser.">
+<meta name="keywords" content="binary to decimal, decimal to binary, hex converter, binary to hex, base converter, dec to hex">
+<link rel="canonical" href="https://base-converter.vercel.app/">
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--ink:#e2e8f0;--muted:#94a3b8;--brand:#22d3ee;--err:#f87171;--line:#334155}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header.top{background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;padding:38px 20px;text-align:center}
+header.top h1{margin:0;font-size:26px}
+header.top p{margin:10px auto 0;opacity:.95;max-width:660px}
+.wrap{max-width:880px;margin:0 auto;padding:20px}
+main{display:grid;gap:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h2{margin:0 0 6px;font-size:18px}
+.card .desc{color:var(--muted);font-size:13px;margin:0 0 10px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+input[type=text],select{width:100%;padding:11px 14px;border:1px solid #475569;border-radius:8px;background:#0b1220;color:var(--ink);font-size:16px;font-family:ui-monospace,Consolas,monospace}
+.out{background:#0b1220;border:1px dashed #475569;border-radius:8px;padding:12px 14px;margin-top:8px;font-family:ui-monospace,Consolas,monospace;font-size:17px;word-break:break-all;display:flex;align-items:center;gap:10px;min-height:46px}
+.copy{margin-left:auto;background:var(--brand);color:#082f49;border:0;border-radius:7px;padding:6px 12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.copy.off{opacity:.45;cursor:not-allowed}
+.hint{color:var(--err);font-size:13px;min-height:1.2em;margin:6px 0 0}
+.qlist{margin:0;padding-left:18px;color:#cbd5e1}.qlist li{margin:4px 0}
+.unirow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin:6px 0}
+footer{background:#0b1220;color:var(--muted);padding:20px;text-align:center;font-size:13px}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <h1>Base Converter — Binary, Decimal &amp; Hex</h1>
+  <p>Convert between binary (base-2), decimal (base-10) and hexadecimal (base-16) in seconds. Binary to decimal, decimal to binary, hex to binary and more — free, no signup, runs in your browser.</p>
+</div></header>
+
+<main class="wrap">
+
+  <section class="grid">
+
+    <div class="card">
+      <h2>Binary → Decimal</h2>
+      <p class="desc">Convert binary (0s and 1s) to a decimal number.</p>
+      <label for="bid">Binary input</label>
+      <input type="text" id="bid" inputmode="text" placeholder="e.g. 101010">
+      <div class="hint" id="hd-bid"></div>
+      <label>Decimal result</label>
+      <div class="out"><span id="rv-bid">—</span><button class="copy off" id="cc-bid">Copy</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Decimal → Binary</h2>
+      <p class="desc">Convert a decimal number to binary.</p>
+      <label for="dbe">Decimal input</label>
+      <input type="text" id="dbe" inputmode="numeric" placeholder="e.g. 42">
+      <div class="hint" id="hd-dbe"></div>
+      <label>Binary result</label>
+      <div class="out"><span id="rv-dbe">—</span><button class="copy off" id="cc-dbe">Copy</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Hex → Binary</h2>
+      <p class="desc">Convert a hex number to binary (0x prefix OK).</p>
+      <label for="hb">Hex input</label>
+      <input type="text" id="hb" inputmode="text" placeholder="e.g. FF or 0xFF">
+      <div class="hint" id="hd-hb"></div>
+      <label>Binary result</label>
+      <div class="out"><span id="rv-hb">—</span><button class="btn" id="cc-hb">Copy</button></div>
+    </div>
+
+  </section>
+
+  <section class="card">
+    <h2>Universal Base Converter</h2>
+    <p class="desc">Pick the input base, type a number, and see it converted to all other bases at once.</p>
+    <label for="uf">Input base</label>
+    <select id="uf">
+      <option value="2">Binary (base-2)</option>
+      <option value="8">Octal (base-8)</option>
+      <option value="10" selected>Decimal (base-10)</option>
+      <option value="16">Hex (base-16)</option>
+    </select>
+    <label for="uv">Value</label>
+    <input type="text" id="uv" placeholder="e.g. 255">
+    <div class="hint" id="hd-uv"></div>
+    <div id="uo"></div>
+  </section>
+
+  <section class="card">
+    <h2>What is a base converter?</h2>
+    <p>A base converter is a free tool that changes a number from one number system to another — binary (2), octal (8), decimal (10), or hexadecimal (16). Programmers and CS students use it every day to switch between how computers store numbers. This tool does it instantly, handles very large and negative numbers, and runs entirely in your browser.</p>
+    <h2>Why use this converter?</h2>
+    <ul class="qlist">
+      <li>Real-time conversion — no page reload.</li>
+      <li>Handles very large numbers and negative values.</li>
+      <li>Simple, fast, no account, no ads.</li>
+      <li>Copy any result with one click.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <p>Free online base converter: binary, decimal, hex &amp; octal. A small practice site.</p>
+</div></footer>
+
+<script src="app.js"></script>
+<script>
+"use strict";
+const RAD = { b:2, o:8, d:10, h:16 }; // b=binary o=octal d=decimal h=hex
+const NAME = {2:"Binary",8:"Octal",10:"Decimal",16:"Hex"};
+
+function doConvert(value, from, to, allowPrefix){
+  try{ return { ok:true, out:BC.convert(value, from, to, {allowPrefix}) }; }
+  catch(e){ return { ok:false, why:e }; }
+}
+function putField(inp, hintEl, outEl, copyBtn, from, to, allowPrefix){
+  const v = inp.value;
+  if(!v.trim()){ hintEl.textContent=""; outEl.textContent="—"; copyBtn.disabled=true; copyBtn.classList.add("off"); return; }
+  const r = doConvert(v, from, to, allowPrefix);
+  if(!r.ok){ hintEl.textContent = r.why==="invalid" ? "Invalid input for this base." : ""; outEl.textContent="—"; copyBtn.disabled=true; return; }
+  hintEl.textContent=""; outEl.textContent = r.out; copyBtn.disabled=false; copyBtn.classList.remove("off");
+}
+async function copyText(text, btn){
+  try{ await navigator.clipboard.writeText(String(text)); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  const old=btn.textContent; btn.textContent="Copied!"; setTimeout(()=>btn.textContent=old, 1200);
+}
+
+/* 三个专用 */
+const bid=document.getElementById('bid'), rvb=document.getElementById('rv-bid'), hdb=document.getElementById('hd-bid'), ccb=document.getElementById('cc-bid');
+bid.addEventListener('input',()=>putField(bid,hdb,rvb,ccb,RAD.b,RAD.d,true));
+ccb.addEventListener('click',()=>copyText(rvb.textContent,ccb));
+putField(bid,hdb,rvb,ccb,RAD.b,RAD.d,true);
+
+const dbe=document.getElementById('dbe'), rvd=document.getElementById('rv-dbe'), hdd=document.getElementById('hd-dbe'), ccd=document.getElementById('cc-dbe');
+dbe.addEventListener('input',()=>putField(dbe,hdd,rvd,ccd,RAD.d,RAD.b,true));
+ccd.addEventListener('click',()=>copyText(rvd.textContent,ccd));
+putField(dbe,hdd,rvd,ccd,RAD.d,RAD.b,true);
+
+const hb=document.getElementById('hb'), rvh=document.getElementById('rv-hb'), hdh=document.getElementById('hd-hb'), cch=document.getElementById('cc-hb');
+hb.addEventListener('input',()=>putField(hb,hdh,rvh,cch,RAD.h,RAD.b,true));
+cch.addEventListener('click',()=>copyText(rvh.textContent,cch));
+putField(hb,hdh,rvh,cch,RAD.h,RAD.b,true);
+
+/* 通用 */
+const uf=document.getElementById('uf'), uv=document.getElementById('uv'), uo=document.getElementById('uo'), hdu=document.getElementById('hd-uv');
+function updU(){
+  const from=parseInt(uf.value), v=uv.value;
+  uo.innerHTML="";
+  if(!v.trim()){ hdu.textContent=""; return; }
+  const r=doConvert(v, from, from, false); // validate
+  if(!r.ok){ hdu.textContent="Invalid input for the selected base."; return; }
+  hdu.textContent="";
+  for(const to of [2,8,10,16]){
+    if(to===from) continue;
+    const rr=BC.convert(v, from, to);
+    const row=document.createElement('div');
+    row.className='out';
+    const span=document.createElement('span'); span.textContent=NAME[to]+": "+rr.out;
+    const b=document.createElement('button'); b.className='copy'; b.textContent='Copy';
+    b.addEventListener('click',()=>copyText(rr.out,b));
+    row.appendChild(span); row.appendChild(b);
+    uo.appendChild(row);
+  }
+}
+uf.addEventListener('change',updU); uv.addEventListener('input',updU);
+</script>
+</body>
+</html>
